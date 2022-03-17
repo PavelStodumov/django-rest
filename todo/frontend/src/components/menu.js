@@ -1,24 +1,21 @@
+import axios from "axios";
 import React from "react";
 
-function Menu() {
+
+const MenuItem = ({ item }) => {
+    return (
+        <li><a href={item[1]}>{item[0]}</a></li>
+    )
+}
+
+
+
+const Menu = ({ menuList }) => {
+    let _menuList = Object.entries(menuList)
     return (
         <div className="menu">
             <ul>
-                <li>
-                    menu
-                </li>
-                <li>
-                    menu
-                </li>
-                <li>
-                    menu
-                </li>
-                <li>
-                    menu
-                </li>
-                <li>
-                    menu
-                </li>
+                {_menuList.map((item) => <MenuItem item={item} />)}
             </ul>
         </div>
     )
