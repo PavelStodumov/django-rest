@@ -1,40 +1,19 @@
-import React from 'react'
+import React from "react";
+import { useParams } from "react-router-dom";
 
 
-const UserItem = ({ user }) => {
+
+const User = ({ items }) => {
+    let { id } = useParams()
+    let user = items.filter((user) => user.uid == id)[0]
+    console.log(user)
     return (
-        <tr>
-            <td>
-                {user.firstName}
-            </td>
-            <td>
-                {user.lastName}
-            </td>
-            <td>
-                {user.email}
-            </td>
-        </tr>
-    )
-}
-
-const UserList = ({ users }) => {
-    return (
-        <div class="table">
-            <table>
-                <th>
-                    First name
-                </th>
-                <th>
-                    Last Name
-                </th>
-                <th>
-                    Email
-                </th>
-                {users.map((user) => <UserItem user={user} />)}
-            </table>
+        <div className="user">
+            <h3>Name: {user.firstName}</h3>
+            <h3>Last name: {user.lastName}</h3>
+            <h3>Email: {user.email}</h3>
         </div>
     )
 }
 
-
-export default UserList
+export default User

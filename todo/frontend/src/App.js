@@ -1,18 +1,33 @@
 import React from 'react';
 import axios from 'axios'
 import './App.css';
-import UserList from './components/user.js';
+import UserList from './components/users.js';
 import Footer from './components/footer';
 import Menu from './components/menu';
 import Header from './components/header';
+import ProjectList from './components/projects';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import TodosList from './components/todos';
+import User from './components/user';
 
+
+const NotFound404 = () => {
+  let location = useLocation()
+  return (
+    <div className='notfound404'>
+      <h1>Page<p>{location.pathname}</p>not found</h1>
+    </div>
+  )
+}
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       'users': [],
-      'menuList': []
+      'projects': [],
+      'todos': [],
+      'menuList': [],
     }
   }
 
@@ -21,6 +36,20 @@ class App extends React.Component {
       const users = response.data.results
       this.setState(
         { 'users': users }
+      )
+    }).catch(error => console.log(error))
+
+    axios.get('http://127.0.0.1:8000/api/projects/').then(response => {
+      const projects = response.data.results
+      this.setState(
+        { 'projects': projects }
+      )
+    }).catch(error => console.log(error))
+
+    axios.get('http://127.0.0.1:8000/api/todos/').then(response => {
+      const todos = response.data.results
+      this.setState(
+        { 'todos': todos }
       )
     }).catch(error => console.log(error))
 
@@ -34,11 +63,20 @@ class App extends React.Component {
 
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <Header />
-        <div class="content">
-          <Menu menuList={this.state.menuList} />
-          <UserList users={this.state.users} />
+        <div className="content">
+
+          <BrowserRouter>
+            <Menu menuList={this.state.menuList} />
+            <Routes>
+              <Route path='/users' element={<UserList users={this.state.users} />} />
+              <Route path='/projects' element={<ProjectList items={this.state.projects} />} />
+              <Route path='/todos' element={<TodosList items={this.state.todos} />} />
+              <Route path='/users/:id' element={<User items={this.state.users} />} />
+              <Route path='*' element={<NotFound404 />} />
+            </Routes>
+          </BrowserRouter>
         </div>
         <Footer />
       </div>

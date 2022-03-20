@@ -1,10 +1,14 @@
-import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 const MenuItem = ({ item }) => {
+    let link = `/${item[0]}`
+    let name = item[0]
     return (
-        <li><a href={item[1]}>{item[0]}</a></li>
+        <li>
+            <Link to={link}>{name}</Link>
+        </li >
     )
 }
 
@@ -13,11 +17,11 @@ const MenuItem = ({ item }) => {
 const Menu = ({ menuList }) => {
     let _menuList = Object.entries(menuList)
     return (
-        <div className="menu">
+        <nav className="menu">
             <ul>
                 {_menuList.map((item) => <MenuItem item={item} />)}
             </ul>
-        </div>
+        </nav>
     )
 }
 
