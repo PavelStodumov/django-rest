@@ -1,6 +1,6 @@
 from .models import Project, Todo
 from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer, StringRelatedField
-from usersapp.serializers import UserModelSerializer
+from usersapp.serializers import UserModelSerializer, UserNameModelSerializer
 from rest_framework import serializers
 
 
@@ -19,7 +19,7 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
 
 
 class TodoModelSerializer(ModelSerializer):
-    user = UserModelSerializer()
+    user = UserNameModelSerializer()
     project = ProjectSimpleModelSerializer()
     created_at = serializers.DateTimeField(format='%d.%m.%Y %H:%M')
     updated_at = serializers.DateTimeField(format='%d.%m.%Y %H:%M')
