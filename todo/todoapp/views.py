@@ -1,4 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
+
+from usersapp.models import User
 from .models import Project, Todo
 from .serializers import ProjectModelSerializer, TodoModelSerializer
 from .filters import ProjectFilter, TodoFilter

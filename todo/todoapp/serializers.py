@@ -4,13 +4,13 @@ from usersapp.serializers import UserModelSerializer, UserNameModelSerializer
 from rest_framework import serializers
 
 
-class ProjectSimpleModelSerializer(HyperlinkedModelSerializer):
+class ProjectSimpleModelSerializer(ModelSerializer):
     class Meta:
         model = Project
         fields = ['name']
 
 
-class ProjectModelSerializer(HyperlinkedModelSerializer):
+class ProjectModelSerializer(ModelSerializer):
     users = StringRelatedField(many=True)
 
     class Meta:
@@ -21,8 +21,10 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
 class TodoModelSerializer(ModelSerializer):
     user = UserNameModelSerializer()
     project = ProjectSimpleModelSerializer()
-    created_at = serializers.DateTimeField(format='%d.%m.%Y %H:%M')
-    updated_at = serializers.DateTimeField(format='%d.%m.%Y %H:%M')
+    created_at = serializers.DateTimeField(
+        format='%d.%m.%Y %H:%M', read_only=True)
+    updated_at = serializers.DateTimeField(
+        format='%d.%m.%Y %H:%M', read_only=True)
 
     class Meta:
         model = Todo
