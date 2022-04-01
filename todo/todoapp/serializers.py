@@ -1,6 +1,7 @@
+import datetime
 from .models import Project, Todo
-from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer, StringRelatedField
-from usersapp.serializers import UserModelSerializer, UserNameModelSerializer
+from rest_framework.serializers import ModelSerializer, StringRelatedField
+from usersapp.serializers import UserNameModelSerializer
 from rest_framework import serializers
 
 
