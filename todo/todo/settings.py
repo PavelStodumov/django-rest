@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'authapp',
 ]
 
+
+AUTH_USER_MODEL = 'usersapp.CustomUser'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -171,4 +174,5 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
+    'USER_ID_FIELD': 'uid',
 }

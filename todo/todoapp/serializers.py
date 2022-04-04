@@ -1,4 +1,4 @@
-import datetime
+
 from .models import Project, Todo
 from rest_framework.serializers import ModelSerializer, StringRelatedField
 from usersapp.serializers import UserNameModelSerializer

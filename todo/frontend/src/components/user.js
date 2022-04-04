@@ -6,7 +6,7 @@ const UserProjects = (project) => project.name
 const User = ({ users, projects }) => {
     let { id } = useParams()
     let user = users.filter((user) => user.uid == id)[0]
-    let userProjects = projects.filter((project) => project.users.includes(user.firstName))
+    let userProjects = projects.filter((project) => project.users.includes(user.username))
     console.log(UserProjects(userProjects[0]))
     return (
         <div className="user">
