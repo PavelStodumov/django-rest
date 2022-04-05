@@ -1,9 +1,6 @@
-from http import client
-import json
-from urllib import response
 from django.test import TestCase
 from rest_framework import status
-from rest_framework.test import APIRequestFactory, force_authenticate, APIClient, APISimpleTestCase, APITestCase
+from rest_framework.test import APIRequestFactory, force_authenticate, APIClient
 from mixer.backend.django import mixer
 from .views import UserModelView
 from .models import CustomUser
@@ -51,7 +48,7 @@ class TestUserModelView(TestCase):
         user = mixer.blend(CustomUser)
         client = APIClient()
         response = client.get(f'/api/users/{user.uid}/')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_update_user_guest(self):
         user = mixer.blend(CustomUser)

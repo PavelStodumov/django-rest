@@ -5,7 +5,7 @@ from usersapp.serializers import UserNameModelSerializer
 from rest_framework import serializers
 
 
-class ProjectSimpleModelSerializer(ModelSerializer):
+class ProjectNameModelSerializer(ModelSerializer):
     class Meta:
         model = Project
         fields = ['name']
@@ -21,7 +21,7 @@ class ProjectModelSerializer(ModelSerializer):
 
 class TodoModelSerializer(ModelSerializer):
     user = UserNameModelSerializer()
-    project = ProjectSimpleModelSerializer()
+    project = ProjectNameModelSerializer()
     created_at = serializers.DateTimeField(
         format='%d.%m.%Y %H:%M', read_only=True)
     updated_at = serializers.DateTimeField(
