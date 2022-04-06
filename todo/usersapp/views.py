@@ -12,7 +12,7 @@ class UserModelView(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelM
     # permission_classes = [IsAuthenticated]
 
     def get_permissions(self):
-        if self.action == 'update':
+        if self.action in ('update', 'create'):
             self.permission_classes = [IsAdminUser, ]
         elif self.action == 'retrieve':
             self.permission_classes = [IsAuthenticated]

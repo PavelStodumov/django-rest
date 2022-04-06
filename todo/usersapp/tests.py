@@ -30,7 +30,7 @@ class TestUserModelView(TestCase):
         request = factory.post(
             '/api/users/', {'username': 'user', 'email': 'user@localhost'}, format='json')
         user = CustomUser.objects.create(
-            username='user', email='user@localhost', password='user')
+            username='user1', email='user1@localhost', password='user1')
         force_authenticate(request, user)
         view = UserModelView.as_view({'post': 'create'})
         response = view(request)
