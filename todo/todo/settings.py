@@ -104,7 +104,7 @@ DATABASES = {
         'NAME': 'drf_todo',
         'USER': 'admin',
         'PASSWORD': 'admin',
-        'HOST': '127.0.0.1',
+        'HOST': 'drf_todo',
         'PORT': '5432',
     }
 }
