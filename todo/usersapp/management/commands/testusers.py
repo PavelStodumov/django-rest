@@ -20,8 +20,8 @@ class Command(BaseCommand):
                 username=f'user{i}', password=make_password(f'user{i}'), email=f'user{i}@localhost')
             user.save()
 
-        # s_user = superuser(
-        #     username='admin', email='admin@localhost', password=make_password('admin'))
-        # s_user.is_superuser = True
-        # s_user.is_staff = True
-        # s_user.save()
+        s_user = superuser(
+            username='admin', email='admin@localhost', password=make_password('admin'))
+        s_user.is_superuser = True
+        s_user.is_staff = True
+        s_user.save()
