@@ -107,10 +107,10 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'drf_todo',
+        'NAME': 'drf_db',
         'USER': 'admin',
         'PASSWORD': 'admin',
-        'HOST': 'drf_db',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
