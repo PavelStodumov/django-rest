@@ -75,7 +75,7 @@ class App extends React.Component {
   }
 
   get_token(username, password) {
-    axios.post('http://127.0.0.1:8000/api/jwt_token/', { "username": username, "password": password }).then(response => this.set_token(
+    axios.post('http://194.67.121.63:8000/api/jwt_token/', { "username": username, "password": password }).then(response => this.set_token(
       response.data['access'],
       response.data['refresh'],
       response.data['firstName']
@@ -85,7 +85,7 @@ class App extends React.Component {
   refresh_token() {
     let cookies = new Cookies()
     let refresh_token = cookies.get('refreshtoken')
-    axios.post('http://127.0.0.1:8000/api/jwt_token/refresh/', { "refresh": refresh_token }).then(response => this.set_token(
+    axios.post('http://194.67.121.63:8000/api/jwt_token/refresh/', { "refresh": refresh_token }).then(response => this.set_token(
       response.data['access'],
       response.data['refresh'],
       this.state.username
@@ -102,20 +102,20 @@ class App extends React.Component {
 
   load_data() {
     const headers = this.get_headers()
-    axios.get('http://127.0.0.1:8000/api/0.1/users/', { headers }).then(response => this.setState({ 'users': response.data.results })).catch(error => {
+    axios.get('http://194.67.121.63:8000/api/0.1/users/', { headers }).then(response => this.setState({ 'users': response.data.results })).catch(error => {
       console.log(error)
       this.setState({ 'users': [] })
     })
-    axios.get('http://127.0.0.1:8000/api/0.1/projects/', { headers }).then(response => this.setState({ 'projects': response.data.results })).catch(error => console.log(error))
-    axios.get('http://127.0.0.1:8000/api/0.1/todos/', { headers }).then(response => this.setState({ 'todos': response.data.results })).catch(error => console.log(error))
-    axios.get('http://127.0.0.1:8000/api/0.1/').then(response => this.setState({ 'menuList': response.data })).catch(error => console.log(error))
+    axios.get('http://194.67.121.63:8000/api/0.1/projects/', { headers }).then(response => this.setState({ 'projects': response.data.results })).catch(error => console.log(error))
+    axios.get('http://194.67.121.63:8000/api/0.1/todos/', { headers }).then(response => this.setState({ 'todos': response.data.results })).catch(error => console.log(error))
+    axios.get('http://194.67.121.63:8000/api/0.1/').then(response => this.setState({ 'menuList': response.data })).catch(error => console.log(error))
   }
 
   createTodo(project, text, user) {
     this.refresh_token()
     const headers = this.get_headers()
     const data = { 'project': project, 'text': text, 'user': user }
-    axios.post('http://127.0.0.1:8000/api/0.1/todos/', data, { headers }).then(response => {
+    axios.post('http://194.67.121.63:8000/api/0.1/todos/', data, { headers }).then(response => {
       let new_todo = response.data
       const project = this.state.projects.filter((item) => item.id == new_todo.project)[0]
       const user = this.state.users.filter((item) => item.id == new_todo.user)[0]
@@ -128,7 +128,7 @@ class App extends React.Component {
   deleteTodo(id) {
     this.refresh_token()
     const headers = this.get_headers()
-    axios.delete(`http://127.0.0.1:8000/api/0.1/todos/${id}/`, { headers }).then(response => {
+    axios.delete(`http://194.67.121.63:8000/api/0.1/todos/${id}/`, { headers }).then(response => {
       this.setState({ 'todos': this.state.todos.filter((item) => item.id != id) })
     }).catch(error => console.log(error))
   }
