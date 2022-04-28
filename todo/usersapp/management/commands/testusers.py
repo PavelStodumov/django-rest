@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User as superuser
 from django.contrib.auth.hashers import make_password
-from usersapp.models import User
+from usersapp.models import CustomUser
 import argparse
 
 
@@ -16,8 +16,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         quantity_users = options['quantity']
         for i in range(1, quantity_users + 1):
-            user = User(
-                first_name=f'user{i}', last_name=f'user{i}_last', email=f'user{i}@localhost')
+            user = CustomUser(
+                username=f'user{i}', password=make_password(f'user{i}'), email=f'user{i}@localhost')
             user.save()
 
         s_user = superuser(
