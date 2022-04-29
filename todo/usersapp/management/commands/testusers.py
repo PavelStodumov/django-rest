@@ -24,7 +24,7 @@ class Command(BaseCommand):
                 email=f'user{i}@localhost')
             user.save()
 
-        s_user = superuser(
+        s_user = CustomUser(
             username='admin',
             first_name='Администратор',
             email='admin@localhost',
