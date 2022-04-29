@@ -12,11 +12,20 @@ import User from './components/user';
 import LoginForm from './components/auth';
 import Cookies from 'universal-cookie';
 
+
 const NotFound404 = () => {
   let location = useLocation()
   return (
-    <div className='notfound404'>
+    <span className='notfound404'>
       <h1>Page<p>{location.pathname}</p>not found</h1>
+    </span>
+  )
+}
+
+const UnAthorized401 = () => {
+  return (
+    <div>
+      <h1>Эту страницу могут просматривать только авторизованные пользователи</h1>
     </div>
   )
 }
@@ -40,11 +49,6 @@ class App extends React.Component {
     return this.state.accesstoken != ''
   }
 
-  // set_token(token) {
-  //   const cookies = new Cookies()
-  //   cookies.set('token', token)
-  //   this.setState({ 'token': token }, () => this.load_data())
-  // }
 
   set_token(accesstoken, refreshtoken, username) {
     this.setState({ 'username': username })
@@ -56,20 +60,10 @@ class App extends React.Component {
     this.setState({ 'accesstoken': accesstoken }, () => this.load_data())
   }
 
-  // logout() {
-  //   this.set_token('')
-  // }
-
   logout() {
     this.set_token('', '', '')
   }
 
-
-  // get_token_from_storage() {
-  //   const cookies = new Cookies()
-  //   const token = cookies.get('token')
-  //   this.setState({ 'token': token }, () => this.load_data())
-  // }
 
   get_token_from_storage() {
     const cookies = new Cookies()
@@ -143,7 +137,9 @@ class App extends React.Component {
             </nav>
             <Routes>
               <Route path='/users' element={<UserList users={this.state.users} />} />
-              <Route path='/users/:id' element={<User users={this.state.users} projects={this.state.projects} />} />
+              <Route path='/users/:id' element={
+                this.is_authenticated() ? <User users={this.state.users} projects={this.state.projects} /> :
+                  <UnAthorized401 />} />
               <Route path='/projects' element={<ProjectList items={this.state.projects} />} />
               <Route path='/todos' element={<TodosList items={this.state.todos} />} />
               <Route path='/login' element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} />

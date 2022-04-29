@@ -8,7 +8,7 @@ const TodosItem = ({ item }) => {
             <td>{item.user.firstName}</td>
             <td>{item.createdAt}</td>
             <td>{item.updatedAt}</td>
-            <td>{item.isActive}</td>
+            <td>{item.isActive == true ? "+" : "-"}</td>
         </tr>
     )
 }
