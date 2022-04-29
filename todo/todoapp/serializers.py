@@ -1,4 +1,7 @@
 
+from dataclasses import field
+from pyexpat import model
+from requests import request
 from .models import Project, Todo
 from rest_framework.serializers import ModelSerializer, StringRelatedField
 from usersapp.serializers import UserNameModelSerializer
@@ -16,7 +19,7 @@ class ProjectModelSerializer(ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ['name', 'link', 'users']
+        fields = ['id', 'name', 'link', 'users']
 
 
 class TodoModelSerializer(ModelSerializer):
@@ -31,3 +34,9 @@ class TodoModelSerializer(ModelSerializer):
         model = Todo
         fields = ['id', 'project', 'text', 'user',
                   'created_at', 'updated_at', 'is_active']
+
+
+class TodoPostSeralizer(ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = '__all__'
