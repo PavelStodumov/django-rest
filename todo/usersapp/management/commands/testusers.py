@@ -25,7 +25,10 @@ class Command(BaseCommand):
             user.save()
 
         s_user = CustomUser(
-            username='admin', email='admin@localhost', password=make_password('admin'))
+            username='admin',
+            last_name='Администратор',
+            email='admin@localhost',
+            password=make_password('admin'))
         s_user.is_superuser = True
         s_user.is_staff = True
         s_user.save()
