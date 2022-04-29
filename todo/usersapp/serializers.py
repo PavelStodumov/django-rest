@@ -14,3 +14,9 @@ class UserNameModelSerializer(ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ['first_name']
+
+
+class UserFullSerializer(ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = '__all__'

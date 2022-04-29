@@ -29,7 +29,7 @@ class TestUserModelView(TestCase):
         factory = APIRequestFactory()
         request = factory.post(
             '/api/users/', {'username': 'user', 'email': 'user@localhost'}, format='json')
-        user = CustomUser.objects.create(
+        user = CustomUser.objects.create_user(
             username='user1', email='user1@localhost', password='user1')
         force_authenticate(request, user)
         view = UserModelView.as_view({'post': 'create'})
@@ -60,7 +60,7 @@ class TestUserModelView(TestCase):
     def test_update_user_admin(self):
         admin = CustomUser.objects.create_superuser(
             'admin', 'admin@localhost', 'admin')
-        user = CustomUser.objects.create(
+        user = CustomUser.objects.create_user(
             username='user', email='user@localhost', password='user')
         client = APIClient()
         client.login(username='admin', password='admin')
