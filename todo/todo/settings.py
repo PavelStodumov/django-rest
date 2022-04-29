@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 
+# временный FIX проблемы с несовместимостью django 4 и graphene-django==2.15.0
+# https://github.com/graphql-python/graphene-django/issues/1284
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +32,7 @@ SECRET_KEY = 'django-insecure-dnkcaa1-g20_flk!@_q^e7=bko@tt)+@&#nifp-zv1=ko#gtl)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -99,6 +105,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'drf_db',
+    #     'USER': 'admin',
+    #     'PASSWORD': 'admin',
+    #     'HOST': 'db',
+    #     'PORT': '5432',
+    # }
 }
 
 
@@ -147,6 +161,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    'http://194.67.121.63',
 ]
 
 REST_FRAMEWORK = {

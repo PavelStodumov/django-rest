@@ -115,7 +115,7 @@ class App extends React.Component {
     this.refresh_token()
     const headers = this.get_headers()
     const data = { 'project': project, 'text': text, 'user': user }
-    axios.post('http://127.0.0.1:8000/api/0.1/todos/', data, { headers, headers }).then(response => {
+    axios.post('http://127.0.0.1:8000/api/0.1/todos/', data, { headers }).then(response => {
       let new_todo = response.data
       const project = this.state.projects.filter((item) => item.id == new_todo.project)[0]
       const user = this.state.users.filter((item) => item.id == new_todo.user)[0]
@@ -128,7 +128,7 @@ class App extends React.Component {
   deleteTodo(id) {
     this.refresh_token()
     const headers = this.get_headers()
-    axios.delete(`http://127.0.0.1:8000/api/0.1/todos/${id}/`, { headers, headers }).then(response => {
+    axios.delete(`http://127.0.0.1:8000/api/0.1/todos/${id}/`, { headers }).then(response => {
       this.setState({ 'todos': this.state.todos.filter((item) => item.id != id) })
     }).catch(error => console.log(error))
   }
