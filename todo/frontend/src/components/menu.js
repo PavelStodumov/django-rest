@@ -17,11 +17,11 @@ const MenuItem = ({ item }) => {
 const Menu = ({ menuList }) => {
     let _menuList = Object.entries(menuList)
     return (
-        <nav className="menu">
-            <ul>
-                {_menuList.map((item) => <MenuItem item={item} />)}
-            </ul>
-        </nav>
+        // <nav className="menu">
+        //     <ul>
+        _menuList.map((item) => <MenuItem item={item} />)
+        //     </ul>
+        // </nav>
     )
 }
 
