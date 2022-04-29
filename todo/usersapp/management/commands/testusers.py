@@ -17,10 +17,14 @@ class Command(BaseCommand):
         quantity_users = options['quantity']
         for i in range(1, quantity_users + 1):
             user = CustomUser(
-                username=f'user{i}', password=make_password(f'user{i}'), email=f'user{i}@localhost')
+                username=f'user{i}',
+                first_name=f'user_{i}_first_name',
+                last_name=f'user_{i}_last_name',
+                password=make_password(f'user{i}'),
+                email=f'user{i}@localhost')
             user.save()
 
-        s_user = superuser(
+        s_user = CustomUser(
             username='admin', email='admin@localhost', password=make_password('admin'))
         s_user.is_superuser = True
         s_user.is_staff = True
