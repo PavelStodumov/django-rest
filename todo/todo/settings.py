@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'graphene_django',
 
     # My apps:
     'usersapp',
@@ -178,4 +179,8 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'USER_ID_FIELD': 'uid',
+}
+
+GRAPHENE = {
+    'SCHEMA': 'todo.schema.schema'
 }

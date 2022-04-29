@@ -101,13 +101,13 @@ class App extends React.Component {
 
   load_data() {
     const headers = this.get_headers()
-    axios.get('http://127.0.0.1:8000/api/users/', { headers }).then(response => this.setState({ 'users': response.data.results })).catch(error => {
+    axios.get('http://127.0.0.1:8000/api/0.1/users/', { headers }).then(response => this.setState({ 'users': response.data.results })).catch(error => {
       console.log(error)
       this.setState({ 'users': [] })
     })
-    axios.get('http://127.0.0.1:8000/api/projects/', { headers }).then(response => this.setState({ 'projects': response.data.results })).catch(error => console.log(error))
-    axios.get('http://127.0.0.1:8000/api/todos/', { headers }).then(response => this.setState({ 'todos': response.data.results })).catch(error => console.log(error))
-    axios.get('http://127.0.0.1:8000/api/').then(response => this.setState({ 'menuList': response.data })).catch(error => console.log(error))
+    axios.get('http://127.0.0.1:8000/api/0.1/projects/', { headers }).then(response => this.setState({ 'projects': response.data.results })).catch(error => console.log(error))
+    axios.get('http://127.0.0.1:8000/api/0.1/todos/', { headers }).then(response => this.setState({ 'todos': response.data.results })).catch(error => console.log(error))
+    axios.get('http://127.0.0.1:8000/api/0.1/').then(response => this.setState({ 'menuList': response.data })).catch(error => console.log(error))
   }
   componentDidMount() {
     this.refresh_token()
