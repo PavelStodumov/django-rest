@@ -16,10 +16,7 @@ services:
       context: .
     expose:
       - 8080
-    command: bash -c "
-      ./wait-for-postgres.sh db
-      && python manage.py migrate
-      && gunicorn todo.wsgi -b 0.0.0.0:8080"
+    command: bash -c " ./wait-for-postgres.sh db && python manage.py migrate && python manage.py testusers --quantity 10 && gunicorn todo.wsgi -b 0.0.0.0:8080"
     depends_on:
       - db
 
@@ -36,4 +33,3 @@ services:
       - 80:80
     depends_on:
       - nginx
-
